@@ -1,0 +1,5 @@
+{
+    "cmake.ignoreCMakeListsMissing": true,
+    "java.home": 'java.jdt.ls.java.com',
+
+}
