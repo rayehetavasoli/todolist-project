@@ -1,6 +1,6 @@
 {
-    "name": "notes_proj",
-    "short_name": "notes_proj",
+    "name": "todolist_project",
+    "short_name": "todolist_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
