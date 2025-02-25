@@ -23,7 +23,14 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    // If your project uses Flutter plugins, add them as needed. 
+    // For example, if the migration guide specifies a plugin id, include it.
+}
+
 
 android {
     compileSdkVersion flutter.compileSdkVersion
