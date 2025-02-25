@@ -1,5 +1,5 @@
-import 'package:notes_proj/models/task_type.dart';
-import 'package:notes_proj/models/type_enum.dart';
+import 'package:todolist_project/models/task_type.dart';
+import 'package:todolist_project/models/type_enum.dart';
 
 List<TaskType> getTaskTypeList() {
   return [

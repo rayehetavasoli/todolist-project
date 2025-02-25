@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_proj/utility/utility.dart';
+import 'package:todolist_project/utility/utility.dart';
 import 'package:time_pickerr/time_pickerr.dart';
-import 'package:notes_proj/services/notification_service.dart';
+import 'package:todolist_project/services/notification_service.dart';
 import '../models/task.dart';
 import '../models/task_type.dart';
 
@@ -57,20 +57,19 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   SliverPadding _getDeveloperInfoBox() {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      sliver: SliverToBoxAdapter(
-        child: Center(
-          child: Text(
-            "dev: Rayehe Tavasoli"
-             ,style: const TextStyle(
-              fontFamily: 'sm',
-              color: Color(0xff18DAA3),
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        sliver: SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              "dev: Rayehe Tavasoli",
+              style: const TextStyle(
+                fontFamily: 'sm',
+                color: Color(0xff18DAA3),
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
-        ),
-      )
-    );
+        ));
   }
 
   SliverPadding taskTitleTextField() {
@@ -164,60 +163,59 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   Widget datePickerButton() {
-  return SliverToBoxAdapter(
-    child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xff18DAA3),
-          minimumSize: Size(200, 48),
-        ),
-        onPressed: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: dateTime ?? DateTime.now(),
-            firstDate: DateTime(2000),
-            lastDate: DateTime(2100),
-            builder: (BuildContext context, Widget? child) {
-              return Theme(
-                data: ThemeData.light().copyWith(
-                  colorScheme: ColorScheme.light(
-                    primary: Color(0xff18DAA3), // رنگ اصلی
-                    onPrimary: Colors.white, // رنگ نوشته‌ها
-                    surface: Colors.white,
-                  ),
-                  dialogBackgroundColor: Colors.white,
-                ),
-                child: child!,
-              );
-            },
-          );
-
-          setState(() {
-            dateTime = DateTime(
-              pickedDate!.year,
-              pickedDate.month,
-              pickedDate.day,
-              dateTime?.hour ?? 0,
-              dateTime?.minute ?? 0,
-            );
-          });
-                },
-        child: Text(
-          dateTime == null
-              ? "انتخاب تاریخ"
-              : "تاریخ انتخاب شده: ${dateTime!.year}/${dateTime!.month}/${dateTime!.day}",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xff18DAA3),
+            minimumSize: Size(200, 48),
           ),
-          textAlign: TextAlign.center,
+          onPressed: () async {
+            DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: dateTime ?? DateTime.now(),
+              firstDate: DateTime(2000),
+              lastDate: DateTime(2100),
+              builder: (BuildContext context, Widget? child) {
+                return Theme(
+                  data: ThemeData.light().copyWith(
+                    colorScheme: ColorScheme.light(
+                      primary: Color(0xff18DAA3), // رنگ اصلی
+                      onPrimary: Colors.white, // رنگ نوشته‌ها
+                      surface: Colors.white,
+                    ),
+                    dialogBackgroundColor: Colors.white,
+                  ),
+                  child: child!,
+                );
+              },
+            );
+
+            setState(() {
+              dateTime = DateTime(
+                pickedDate!.year,
+                pickedDate.month,
+                pickedDate.day,
+                dateTime?.hour ?? 0,
+                dateTime?.minute ?? 0,
+              );
+            });
+          },
+          child: Text(
+            dateTime == null
+                ? "انتخاب تاریخ"
+                : "تاریخ انتخاب شده: ${dateTime!.year}/${dateTime!.month}/${dateTime!.day}",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   Widget timePicker() {
     return SliverToBoxAdapter(
@@ -300,14 +298,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       ),
     );
   }
-void scheduleTaskNotification(Task task) {
-  NotificationService().scheduleNotification(
-    task.key ?? 0, // شناسه نوتیفیکیشن
-    task.title,
-    task.body,
-    task.time, // زمانی که کاربر انتخاب کرده
-  );
-}
+
+  void scheduleTaskNotification(Task task) {
+    NotificationService().scheduleNotification(
+      task.key ?? 0, // شناسه نوتیفیکیشن
+      task.title,
+      task.body,
+      task.time, // زمانی که کاربر انتخاب کرده
+    );
+  }
 
   Future<void> addTask() async {
     if (dateTime == null) {
@@ -317,16 +316,15 @@ void scheduleTaskNotification(Task task) {
     String taskSubTitle = taskBodyController.text;
 
     var task = Task(
-      
       title: taskTitle,
       body: taskSubTitle,
       isDone: false,
-      date: pickedDate!, 
+      date: pickedDate!,
       time: dateTime!,
       taskType: getTaskTypeList()[_selectedTsakTypeItem],
     );
 
-    int? taskKey = await box.add(task); 
+    int? taskKey = await box.add(task);
     scheduleTaskNotification(task.copyWith(key: taskKey));
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_proj/screens/edit_task_screen.dart';
+import 'package:todolist_project/screens/edit_task_screen.dart';
 import 'package:intl/intl.dart';
 import '../models/task.dart';
 
@@ -131,18 +131,20 @@ class _TaskWidgetState extends State<TaskWidget> {
                 child: Row(
                   children: [
                     Text(
-                        getFormattedDate(widget.task.date),
-                        style: TextStyle(
-                          color: Colors.white,
+                      getFormattedDate(widget.task.date),
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    getHour(widget.task.time.hour) + ':' + getHour(widget.task.time.minute),  // زمان تسک
-                    style: TextStyle(
-                      color: Colors.white,
+                    SizedBox(width: 10),
+                    Text(
+                      getHour(widget.task.time.hour) +
+                          ':' +
+                          getHour(widget.task.time.minute), // زمان تسک
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
                     SizedBox(width: 10),
                     Image.asset("assets/images/icon_time.png"),
                   ],
@@ -196,9 +198,11 @@ class _TaskWidgetState extends State<TaskWidget> {
       ],
     );
   }
+
   String getFormattedDate(DateTime date) {
-  return DateFormat('yyyy-MM-dd').format(date);
-}
+    return DateFormat('yyyy-MM-dd').format(date);
+  }
+
   String getHour(int hour) {
     return hour < 10 ? '0${hour}' : hour.toString();
   }
