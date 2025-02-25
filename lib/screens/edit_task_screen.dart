@@ -170,7 +170,7 @@ Widget getDatePickerButton() {
 
           setState(() {
             dateTime = DateTime(
-              pickedDate.year,
+              pickedDate!.year,
               pickedDate.month,
               pickedDate.day,
               dateTime?.hour ?? widget.tsk!.time.hour,
