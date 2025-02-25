@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - master
-      - saleh/test-rebase
+      - 'saleh/test-rebase'
+      - 'saleh/**'
 
 jobs:
   build:
