@@ -3,7 +3,8 @@ name: Build and Release APK
 on:
   push:
     branches:
-      - master  # Runs on every push to the main branch
+      - master
+      - saleh/test-rebase
 
 jobs:
   build:
