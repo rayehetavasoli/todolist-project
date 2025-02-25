@@ -4,16 +4,16 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_proj/models/task.dart';
-import 'package:notes_proj/screens/home_screen.dart';
-import 'package:notes_proj/models/task_type.dart';
-import 'package:notes_proj/models/type_enum.dart';
+import 'package:todolist_project/models/task.dart';
+import 'package:todolist_project/screens/home_screen.dart';
+import 'package:todolist_project/models/task_type.dart';
+import 'package:todolist_project/models/type_enum.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
     await DesktopWindow.setMinWindowSize(Size(860, 850));
   }
@@ -24,7 +24,7 @@ void main() async {
   Hive.registerAdapter(TaskEnumAdapter());
 
   await Hive.openBox<Task>("tasksBox");
-  
+
   // مقداردهی اولیه تایم‌زون و نوتیفیکیشن
   tz.initializeTimeZones();
   await _initializeNotifications();
@@ -42,7 +42,6 @@ Future<void> _initializeNotifications() async {
 
   await flutterLocalNotificationsPlugin.initialize(initSettings);
 }
-
 
 class Application extends StatelessWidget {
   const Application({super.key});

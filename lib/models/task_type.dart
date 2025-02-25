@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_proj/models/type_enum.dart';
+import 'package:todolist_project/models/type_enum.dart';
 
 part 'task_type.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_proj/models/task_type.dart';
+import 'package:todolist_project/models/task_type.dart';
 
 part "task.g.dart";
 
@@ -28,7 +28,7 @@ class Task extends HiveObject {
   bool isDone;
 
   @HiveField(3)
-  DateTime date; 
+  DateTime date;
 
   @HiveField(4)
   DateTime time;

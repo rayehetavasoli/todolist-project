@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_proj/screens/add_task_screen.dart';
+import 'package:todolist_project/screens/add_task_screen.dart';
 import 'package:time_pickerr/time_pickerr.dart';
 
 import '../models/task.dart';
@@ -36,7 +36,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
 
     _selectedTsakTypeItem =
         getTaskTypeList().indexWhere((el) => el.taskEnum == widget.tsk!.taskType.taskEnum);
-            dateTime = widget.tsk!.time;
+    dateTime = widget.tsk!.time;
     print(_selectedTsakTypeItem);
     text1.addListener(() {
       setState(() {});
@@ -138,66 +138,65 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     );
   }
 
-Widget getDatePickerButton() {
-  return SliverToBoxAdapter(
-    child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xff18DAA3),
-          minimumSize: Size(200, 48),
-        ),
-        onPressed: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: dateTime ?? widget.tsk!.time,
-            firstDate: DateTime(2000),
-            lastDate: DateTime(2100),
-            builder: (BuildContext context, Widget? child) {
-              return Theme(
-                data: ThemeData.light().copyWith(
-                  colorScheme: ColorScheme.light(
-                    primary: Color(0xff18DAA3), // رنگ اصلی
-                    onPrimary: Colors.white, // رنگ نوشته‌ها
-                    surface: Colors.white,
-                  ),
-                  dialogBackgroundColor: Colors.white,
-                ),
-                child: child!,
-              );
-            },
-          );
-
-          setState(() {
-            dateTime = DateTime(
-              pickedDate!.year,
-              pickedDate.month,
-              pickedDate.day,
-              dateTime?.hour ?? widget.tsk!.time.hour,
-              dateTime?.minute ?? widget.tsk!.time.minute,
-            );
-          });
-                },
-        child: Text(
-          dateTime == null
-              ? "انتخاب تاریخ"
-              : "تاریخ انتخاب شده: ${dateTime!.year}/${dateTime!.month}/${dateTime!.day}",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+  Widget getDatePickerButton() {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xff18DAA3),
+            minimumSize: Size(200, 48),
           ),
-          textAlign: TextAlign.center,
+          onPressed: () async {
+            DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: dateTime ?? widget.tsk!.time,
+              firstDate: DateTime(2000),
+              lastDate: DateTime(2100),
+              builder: (BuildContext context, Widget? child) {
+                return Theme(
+                  data: ThemeData.light().copyWith(
+                    colorScheme: ColorScheme.light(
+                      primary: Color(0xff18DAA3), // رنگ اصلی
+                      onPrimary: Colors.white, // رنگ نوشته‌ها
+                      surface: Colors.white,
+                    ),
+                    dialogBackgroundColor: Colors.white,
+                  ),
+                  child: child!,
+                );
+              },
+            );
+
+            setState(() {
+              dateTime = DateTime(
+                pickedDate!.year,
+                pickedDate.month,
+                pickedDate.day,
+                dateTime?.hour ?? widget.tsk!.time.hour,
+                dateTime?.minute ?? widget.tsk!.time.minute,
+              );
+            });
+          },
+          child: Text(
+            dateTime == null
+                ? "انتخاب تاریخ"
+                : "تاریخ انتخاب شده: ${dateTime!.year}/${dateTime!.month}/${dateTime!.day}",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   Widget getTimePicker() {
     return SliverToBoxAdapter(
       child: CustomHourPicker(
-        date: widget.tsk!.time, 
+        date: widget.tsk!.time,
         title: 'زمان تسک رو انتخاب کن',
         titleStyle: TextStyle(
           color: Color(0xff18DAA3),
@@ -219,7 +218,7 @@ Widget getDatePickerButton() {
         elevation: 2,
         onNegativePressed: (context) {},
         onPositivePressed: (context, time) {
-          widget.tsk!.time = time; 
+          widget.tsk!.time = time;
         },
       ),
     );
@@ -322,8 +321,8 @@ Widget getDatePickerButton() {
     widget.tsk!.body = taskSubTitle;
     widget.tsk!.title = taskTitle;
     if (dateTime != null) {
-    widget.tsk!.time = dateTime!;
-  }
+      widget.tsk!.time = dateTime!;
+    }
     widget.tsk!.taskType = getTaskTypeList()[_selectedTsakTypeItem!];
     await widget.tsk!.save();
   }

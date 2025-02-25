@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_proj/screens/add_task_screen.dart';
+import 'package:todolist_project/screens/add_task_screen.dart';
 import '../models/task.dart';
 import '../widgets/task_widget.dart';
 
