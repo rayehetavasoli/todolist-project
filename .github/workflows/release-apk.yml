@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-      - 'saleh/test-rebase'
-      - 'saleh/**'
+      - "saleh/test-rebase"
+      - "saleh/**"
 
 jobs:
   build:
@@ -38,30 +38,14 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Ensure full history to create and push tags
-
       - name: Download APK Artifact
         uses: actions/download-artifact@v4
         with:
           name: app-release-apk
 
-      - name: Create Tag
-        id: create_tag
-        run: |
-          TAG="release-${GITHUB_RUN_NUMBER}"
-          echo "TAG=$TAG" >> $GITHUB_ENV
-          # Configure Git so we can push the tag
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git tag "$TAG"
-          git push origin "$TAG"
-
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag: ${{ env.TAG }}
+          tag_name: "1.0.0" # Use the static tag you've created
           files: app-release-apk/app-release.apk
